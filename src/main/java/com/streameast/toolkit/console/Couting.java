@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * This class is a tool for the limitation of time of a cycle in console
  * 
- * @autor streameast
+ * @author streameast
  */
 public class Couting {
     

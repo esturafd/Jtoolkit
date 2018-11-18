@@ -4,9 +4,13 @@ apply plugin: 'maven'
 group = 'com.streameast.toolkit'
 version = '2.0.0'
 sourceCompatibility = '1.5'
+targetCompatibility = '1.6'
 
 dependencies {
     api 'commons-lang:commons-lang:2.6'
+    api 'commons-dbutils:commons-dbutils:1.7'
+    api 'org.yaml:snakeyaml:1.11'
+    api 'net.xrrocha:yamltag:1.0.0'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'

@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * This class handles the printing of a list in a console
  * 
- * @autor streameast
+ * @author streameast
  */
 public class ListHandler {
     

@@ -13,6 +13,24 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>commons-dbutils</groupId>
+      <artifactId>commons-dbutils</artifactId>
+      <version>1.7</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.11</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.xrrocha</groupId>
+      <artifactId>yamltag</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
