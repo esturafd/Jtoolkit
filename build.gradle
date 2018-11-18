@@ -20,6 +20,10 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnit()
+}
+
 task createPom <<{
     pom {
     }.writeTo("pom.xml")
