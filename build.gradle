@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+apply plugin: 'maven'
+
+group = 'com.streameast.toolkit'
+version = '2.0.0'
+sourceCompatibility = '1.5'
+
+dependencies {
+    api 'commons-lang:commons-lang:2.6'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    mavenCentral()
+}
+
+task createPom <<{
+    pom {
+    }.writeTo("pom.xml")
+}
