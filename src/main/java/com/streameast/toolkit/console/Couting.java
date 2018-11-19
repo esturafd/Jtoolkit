@@ -14,8 +14,8 @@ public class Couting {
     
     private int pointer;
     private int maxNumber;
-    private String messageTimeOut = "";
-    private String messageExit = "";
+    private String messageTimeOut = "A long time passed, you want to continue?(Y/n) ";
+    private String messageExit = "The program is closed.";
     
     public Couting(int maxNumber) {
         this.pointer = 0;
@@ -66,7 +66,7 @@ public class Couting {
      * 
      * @return String answer
      */
-    private String getAnswer(Scanner console) {
+    private String getAnswer(final Scanner console) {
         String foo = null;
         try {
             FutureTask<String> fTask = new FutureTask<String>(new Callable<String>() {

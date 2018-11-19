@@ -21,7 +21,17 @@ public class MapProperty<K, V> extends HashMap<K, V> {
     
     @SuppressWarnings("unchecked")
     public MapProperty(String path) {
-        Object foo = getObjectProperties(path);
+        Object foo = null;
+        ClassLoader loader = getClass().getClassLoader();
+        File file = new File(loader.getResource(path).getFile());
+        if (file.exists()) {
+            foo = getObjectProperties(file);
+        } else {
+            file = new File(path);
+            if (file.exists()) {
+                foo = getObjectProperties(file);
+            }
+        }
         if (foo instanceof Map<?, ?>) {
             this.putAll((Map<K, V>) foo);
         }
@@ -32,9 +42,8 @@ public class MapProperty<K, V> extends HashMap<K, V> {
      * 
      * @return Map properties
      */
-    public static Object getObjectProperties(String pathFile) {
+    public static Object getObjectProperties(File file) {
         Yaml parser = new DefaultYamlFactory().newYaml();
-        File file = new File(pathFile);
         Object foo = null;
         try {
             if (file.exists()) {

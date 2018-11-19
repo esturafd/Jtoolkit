@@ -17,7 +17,7 @@ public class CoutingTest {
         for (i = 0; i < (maxCount * 2) && valid; i++) {
             valid = valCount.count();
         }
-        if (i > maxCount) {
+        if (i != maxCount) {
             fail("Ocurrio un error en el conteo " + i);
         }
     }
