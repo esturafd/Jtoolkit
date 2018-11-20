@@ -62,15 +62,15 @@ public class Menu {
             MenuExecutable program = (MenuExecutable) constructor.newInstance();
             program.toDo();
         } catch (ClassNotFoundException e) {
-            throw new MenuException("Invalid exec class in yaml file", e);
+            throw new MenuException("Invalid exec class configuration", e);
         } catch (NoSuchMethodException e) {
-            throw new MenuException("Invalid exec class in yaml file", e);
+            throw new MenuException("Invalid exec class configuration", e);
         } catch (InvocationTargetException e) {
-            throw new MenuException("Invalid exec class", e);
+            throw new MenuException("Error instantiating exec class", e);
         } catch (IllegalAccessException e) {
-            throw new MenuException("Invalid exec class", e);
+            throw new MenuException("Error instantiating exec class", e);
         } catch (InstantiationException e) {
-            throw new MenuException("Invalid exec class", e);
+            throw new MenuException("Error instantiating exec class", e);
         }
     }
     
