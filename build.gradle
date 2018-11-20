@@ -4,7 +4,7 @@ apply plugin: 'maven'
 group = 'com.streameast.toolkit'
 version = '2.0.0'
 sourceCompatibility = '1.5'
-targetCompatibility = '1.6'
+targetCompatibility = '1.5'
 
 dependencies {
     api 'commons-lang:commons-lang:2.6'
