@@ -15,15 +15,27 @@ import org.yaml.snakeyaml.Yaml;
  * 
  * @author streameast
  */
-public class MapProperty<K, V> extends HashMap<K, V> {
+public class MapProperties<K, V> extends HashMap<K, V> {
     
     private static final long serialVersionUID = 1L;
     
     @SuppressWarnings("unchecked")
-    public MapProperty(String path) {
-        Object foo = null;
-        ClassLoader loader = getClass().getClassLoader();
+    public MapProperties(String path) {
+        Object foo = getObjectProperties(path);
+        if (foo instanceof Map<?, ?>) {
+            this.putAll((Map<K, V>) foo);
+        }
+    }
+    
+    /**
+     * This method return a map properties yaml
+     * 
+     * @return Map properties
+     */
+    public static Object getObjectProperties(String path) {
+        ClassLoader loader = MapProperties.class.getClassLoader();
         File file = new File(loader.getResource(path).getFile());
+        Object foo = null;
         if (file.exists()) {
             foo = getObjectProperties(file);
         } else {
@@ -32,9 +44,7 @@ public class MapProperty<K, V> extends HashMap<K, V> {
                 foo = getObjectProperties(file);
             }
         }
-        if (foo instanceof Map<?, ?>) {
-            this.putAll((Map<K, V>) foo);
-        }
+        return foo;
     }
     
     /**

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import static com.streameast.toolkit.console.Ansi.*;
+
 /**
  * This class handles the printing of a list in a console
  * 
@@ -12,9 +14,6 @@ import org.apache.commons.lang.StringUtils;
 public class ListHandler {
     
     private int lastSize;
-    private final String CURSORUP = "\033[%dA";
-    private final String ERASELINE = "\033[2K";
-    private final String ERASESCREEN = "\033[2J";
     
     public ListHandler() {
         lastSize = 0;
@@ -45,8 +44,8 @@ public class ListHandler {
      */
     public void returnLines(int numLines) {
         if (numLines > 0) {
-            System.out.println(String.format(CURSORUP, numLines));
-            System.out.println(ERASELINE);
+            System.out.println(cursorUp(numLines));
+            System.out.println(ERS_DOWN);
         }
     }
 
@@ -61,6 +60,6 @@ public class ListHandler {
      * Clean the console
      */
     public void clean() {
-        System.out.println(ERASESCREEN);
+        System.out.println(ERS_SCREEN);
     }
 }

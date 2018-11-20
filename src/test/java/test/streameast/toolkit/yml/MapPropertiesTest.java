@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import test.streameast.toolkit.help.ObjectTag;
 
-import com.streameast.toolkit.yml.MapProperty;
+import com.streameast.toolkit.yml.MapProperties;
 
 public class MapPropertiesTest {
     
@@ -17,7 +17,7 @@ public class MapPropertiesTest {
     
     @Before
     public void initMap() {
-        properties = new MapProperty<String, Object>("properties.yml");
+        properties = new MapProperties<String, Object>("properties.yml");
     }
     
     @Test
