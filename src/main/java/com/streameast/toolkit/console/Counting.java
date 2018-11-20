@@ -13,20 +13,20 @@ import com.streameast.toolkit.yml.MapProperties;
  * 
  * @author streameast
  */
-public class Couting {
+public class Counting {
     
     private int pointer;
     private int maxNumber;
     private String timeoutMessage = "A long time passed, you want to continue?(Y/n) ";
     private String exitMessage = "The program is closed.";
     
-    public Couting(int maxNumber) {
+    public Counting(int maxNumber) {
         this.pointer = 0;
         this.maxNumber = maxNumber;
     }
     
     @SuppressWarnings("unchecked")
-    public Couting(String config, int maxNumber) {
+    public Counting(String config, int maxNumber) {
         this(maxNumber);
         Map<String, Object> map = new MapProperties<String, Object>(config);
         if (map.containsKey("stop-messages")) {
