@@ -1,4 +1,4 @@
-package com.streameast.toolkit.console;
+package com.streameast.toolkit.exception;
 
 public class MenuException extends RuntimeException {
     

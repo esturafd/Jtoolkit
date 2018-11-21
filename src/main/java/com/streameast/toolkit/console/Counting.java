@@ -1,7 +1,6 @@
 package com.streameast.toolkit.console;
 
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
@@ -17,17 +16,19 @@ public class Counting {
     
     private int pointer;
     private int maxNumber;
+    private ConsoleIO console;
     private String timeoutMessage = "A long time passed, you want to continue?(Y/n) ";
     private String exitMessage = "The program is closed.";
     
-    public Counting(int maxNumber) {
+    public Counting(ConsoleIO console, int maxNumber) {
         this.pointer = 0;
         this.maxNumber = maxNumber;
+        this.console = console;
     }
     
     @SuppressWarnings("unchecked")
-    public Counting(String config, int maxNumber) {
-        this(maxNumber);
+    public Counting(ConsoleIO console, String config, int maxNumber) {
+        this(console, maxNumber);
         Map<String, Object> map = new MapProperties<String, Object>(config);
         if (map.containsKey("stop-messages")) {
             map = (Map<String, Object>) map.get("stop-messages");
@@ -61,20 +62,15 @@ public class Counting {
         boolean yes = false;
         boolean no = false;
         String answer = null;
-        Scanner console = new Scanner(System.in);
-        try {
-            do {
-                System.out.println(timeoutMessage);
-                answer = getAnswer(console);
-                if (answer != null) {
-                    yes = answer.equals("Y") || answer.equals("y");
-                    no = answer.equals("N") || answer.equals("n");
-                }
-            } while (answer != null && !(yes || no));
-        } finally {
-            console.close();
-        }
-        return false;
+        do {
+            System.out.print(timeoutMessage);
+            answer = getAnswer(console);
+            if (answer != null) {
+                yes = answer.equals("Y") || answer.equals("y");
+                no = answer.equals("N") || answer.equals("n");
+            }
+        } while (answer != null && !(yes || no));
+        return yes;
     }
     
     /**
@@ -82,12 +78,12 @@ public class Counting {
      * 
      * @return String answer
      */
-    private String getAnswer(final Scanner console) {
+    private String getAnswer(final ConsoleIO console) {
         String foo = null;
         try {
             FutureTask<String> fTask = new FutureTask<String>(new Callable<String>() {
                 public String call() {
-                    return console.nextLine();
+                    return console.readLine();
                 }
             });
             foo = fTask.get(1, TimeUnit.MINUTES);

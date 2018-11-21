@@ -4,7 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import com.streameast.toolkit.exception.ConsoleIOException;
+import com.streameast.toolkit.exception.MenuException;
 
 import static com.streameast.toolkit.yml.MapProperties.*;
 import static com.streameast.toolkit.console.Ansi.*;
@@ -16,7 +18,7 @@ public class Menu {
     private String option;
     private String exec;
     private List<Menu> subMenus;
-    private Scanner read;
+    private ConsoleIO console;
     
     public Menu(String config) {
         if (config != null) {
@@ -29,12 +31,12 @@ public class Menu {
         }
     }
     
-    public void up() {
-        up(null);
+    public Menu() {
+        this(null);
     }
     
-    public void up(Scanner read) {
-        this.read = read == null? new Scanner(System.in): read;
+    public void up(ConsoleIO console) {
+        this.console = console == null? new SystemConsoleIO(): console;
         if (subMenus != null) {
             doMenu();
         } else if (exec != null) {
@@ -44,13 +46,23 @@ public class Menu {
         }
     }
     
+    public void up() {
+        up(null);
+    }
+    
     private void doMenu() {
         int index = 0;
         do {
-            printMenu();
-            index = Integer.parseInt(read.nextLine()) - 1;
-            if (index < subMenus.size()) {
-                subMenus.get(index).up(read);
+            try {
+                printMenu();
+                index = Integer.parseInt(console.readLine()) - 1;
+                if (index < subMenus.size()) {
+                    subMenus.get(index).up(console);
+                }
+            } catch(ConsoleIOException e) {
+                throw new MenuException("Error when reading entry", e);
+            } catch(NumberFormatException e) {
+                // The menu is reprinted
             }
         } while (index >= 0);
     }
