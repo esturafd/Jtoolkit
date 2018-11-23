@@ -2,8 +2,12 @@ package com.streameast.toolkit.console;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import com.streameast.toolkit.yml.MapProperties;
 
@@ -63,8 +67,8 @@ public class Counting {
         boolean no = false;
         String answer = null;
         do {
-            System.out.print(timeoutMessage);
-            answer = getAnswer(console);
+            console.print(timeoutMessage);
+            answer = getAnswer();
             if (answer != null) {
                 yes = answer.equals("Y") || answer.equals("y");
                 no = answer.equals("N") || answer.equals("n");
@@ -78,18 +82,32 @@ public class Counting {
      * 
      * @return String answer
      */
-    private String getAnswer(final ConsoleIO console) {
+    private String getAnswer() {
         String foo = null;
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> fTask = executor.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return console.readLine();
+            }
+        });
         try {
-            FutureTask<String> fTask = new FutureTask<String>(new Callable<String>() {
-                public String call() {
-                    return console.readLine();
-                }
-            });
             foo = fTask.get(1, TimeUnit.MINUTES);
-        } catch (Exception e) {
-            System.out.println("\n" + exitMessage);
+        } catch (TimeoutException e) {
+            exit();
+        } catch (InterruptedException e) {
+            exit();
+        } catch (ExecutionException e) {
+            exit();
         }
         return foo;
+    }
+    
+    /**
+     * This method ends the waiting for a response
+     */
+    private void exit() {
+        console.println(exitMessage);
+        System.exit(0);
     }
 }

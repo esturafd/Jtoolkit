@@ -11,6 +11,11 @@ import com.streameast.toolkit.exception.MenuException;
 import static com.streameast.toolkit.yml.MapProperties.*;
 import static com.streameast.toolkit.console.Ansi.*;
 
+/**
+ * Class of command line menu management
+ * 
+ * @author streameast
+ */
 public class Menu {
     
     private String title;
@@ -35,6 +40,9 @@ public class Menu {
         this(null);
     }
     
+    /**
+     * This method up the menu
+     */
     public void up(ConsoleIO console) {
         this.console = console == null? new SystemConsoleIO(): console;
         if (subMenus != null) {
@@ -46,10 +54,16 @@ public class Menu {
         }
     }
     
+    /**
+     * This method up the menu
+     */
     public void up() {
         up(null);
     }
     
+    /**
+     * Execute the menu
+     */
     private void doMenu() {
         int index = 0;
         do {
@@ -67,6 +81,9 @@ public class Menu {
         } while (index >= 0);
     }
     
+    /**
+     * Execute the selected sub-menu
+     */
     private void doExec() {
         try {
             Class<?> execClass = Class.forName(exec);
@@ -86,6 +103,9 @@ public class Menu {
         }
     }
     
+    /**
+     * Print the menu
+     */
     private void printMenu() {
         System.out.println(ERS_SCREEN);
         System.out.println(coloredText("# " + title + "\n", GREEN));

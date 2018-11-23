@@ -10,22 +10,24 @@ import java.util.Locale;
 import org.apache.commons.lang.StringUtils;
 
 import com.streameast.toolkit.exception.ConsoleIOException;
+
 import static com.streameast.toolkit.console.Ansi.*;
 
+/**
+ * Default system console
+ * 
+ * @author streameast
+ */
 public class SystemConsoleIO implements ConsoleIO {
     
-    private static int using;
     private BufferedReader reader;
     private InputStreamReader input;
     private PrintStream output;
     private int lastln;
     
     public SystemConsoleIO() {
-        input = new InputStreamReader(System.in);
-        reader = new BufferedReader(input);
         output = System.out;
         lastln = 0;
-        using = 0;
     }
     
     public void print(boolean b) {
@@ -139,8 +141,9 @@ public class SystemConsoleIO implements ConsoleIO {
     
     public int read() {
         int foo = -1;
+        initInput();
         try {
-            reader.read();
+            foo = reader.read();
         } catch(IOException e) {
             throw new ConsoleIOException("Error when reading console", e);
         }
@@ -149,8 +152,9 @@ public class SystemConsoleIO implements ConsoleIO {
     
     public int read(char[] cbuf, int off, int len) {
         int foo = -1;
+        initInput();
         try {
-            reader.read(cbuf, off, len);
+            foo = reader.read(cbuf, off, len);
         } catch(IOException e) {
             throw new ConsoleIOException("Error when reading console", e);
         }
@@ -159,8 +163,9 @@ public class SystemConsoleIO implements ConsoleIO {
     
     public String readLine() {
         String foo = null;
+        initInput();
         try {
-            reader.readLine();
+            foo = reader.readLine();
         } catch(IOException e) {
             throw new ConsoleIOException("Error when reading console", e);
         }
@@ -168,14 +173,20 @@ public class SystemConsoleIO implements ConsoleIO {
     }
     
     public void close() {
-        using--;
-        if (using <= 0) {
+        if (reader != null) {
             try {
                 reader.close();
                 input.close();
             } catch(IOException e) {
                 throw new ConsoleIOException("Error when closing console", e);
             }
+        }
+    }
+    
+    private void initInput() {
+        if (reader == null) {
+            input = new InputStreamReader(System.in);
+            reader = new BufferedReader(input);
         }
     }
 }

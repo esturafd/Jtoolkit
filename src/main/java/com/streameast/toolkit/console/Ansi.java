@@ -1,5 +1,10 @@
 package com.streameast.toolkit.console;
 
+/**
+ * Help class for ANSI console escape sequences
+ * 
+ * @author streameast
+ */
 public class Ansi {
     
     public static final String ESC = "\033";
