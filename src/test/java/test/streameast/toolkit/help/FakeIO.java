@@ -8,10 +8,14 @@ import com.streameast.toolkit.console.ConsoleIO;
 
 public class FakeIO implements ConsoleIO {
     
-    PrintStream output;
+    private PrintStream output;
+    private String[] input;
+    private int count;
     
-    public FakeIO() {
-        output = System.out;
+    public FakeIO(String... input) {
+        this.output = System.out;
+        this.input = input;
+        this.count = 0;
     }
     
     public void print(boolean b) {
@@ -115,8 +119,12 @@ public class FakeIO implements ConsoleIO {
     }
     
     public String readLine() {
-        System.out.println("n");
-        return "n";
+        String foo = input[count];
+        output.println(foo);
+        if (++count >= input.length) {
+            count = 0;
+        }
+        return foo;
     }
     
     public void close() {}

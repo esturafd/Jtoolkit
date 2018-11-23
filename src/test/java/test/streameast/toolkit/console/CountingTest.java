@@ -40,7 +40,7 @@ public class CountingTest {
         int i;
         int maxCount = 5;
         boolean valid = true;
-        ConsoleIO console = new FakeIO();
+        ConsoleIO console = new FakeIO("n");
         try {
             Counting valCount = new Counting(console, maxCount);
             for (i = 0; i < (maxCount + 2) && valid; i++) {

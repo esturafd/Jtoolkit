@@ -70,7 +70,7 @@ public class Menu {
             try {
                 printMenu();
                 index = Integer.parseInt(console.readLine()) - 1;
-                if (index < subMenus.size()) {
+                if (index < subMenus.size() && index > 0) {
                     subMenus.get(index).up(console);
                 }
             } catch(ConsoleIOException e) {
@@ -87,7 +87,7 @@ public class Menu {
     private void doExec() {
         try {
             Class<?> execClass = Class.forName(exec);
-            Constructor<?> constructor = execClass.getConstructor(String.class);
+            Constructor<?> constructor = execClass.getConstructor();
             MenuExecutable program = (MenuExecutable) constructor.newInstance();
             program.toDo();
         } catch (ClassNotFoundException e) {

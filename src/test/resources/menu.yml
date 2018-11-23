@@ -1,0 +1,18 @@
+#
+--- !!com.streameast.toolkit.console.Menu
+title: "Titulo de menu principal"
+text: "texto de presentacion del menu"
+options:
+    - !!com.streameast.toolkit.console.Menu
+        option: "opcion de menu 1"
+        exec: test.streameast.toolkit.help.SomeThink
+    - !!com.streameast.toolkit.console.Menu
+        option: "opcion de menu 2"
+        title: "Sub-menu opcion 2"
+        options:
+            - !!com.streameast.toolkit.console.Menu
+                option: "opcion de sub-menu 1"
+                exec: test.streameast.toolkit.help.SomeThink
+            - !!com.streameast.toolkit.console.Menu
+                option: "opcion de sub-menu 2"
+                exec: test.streameast.toolkit.help.SomeThink
