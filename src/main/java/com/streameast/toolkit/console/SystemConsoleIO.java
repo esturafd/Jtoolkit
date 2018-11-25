@@ -114,7 +114,7 @@ public class SystemConsoleIO implements ConsoleIO {
         output.println(s);
     }
     
-    public void println(List<Object> l, boolean updatable) {
+    public void println(List<? extends Object> l, boolean updatable) {
         if (l.size() > 0) {
             if (updatable) {
                 returnln();

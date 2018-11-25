@@ -28,7 +28,7 @@ public interface ConsoleIO {
     public void println(long l);
     public void println(Object obj);
     public void println(String s);
-    public void println(List<Object> l, boolean updatable);
+    public void println(List<? extends Object> l, boolean updatable);
     public void returnln();
     public void returnln(int ln);
     public void clean();
