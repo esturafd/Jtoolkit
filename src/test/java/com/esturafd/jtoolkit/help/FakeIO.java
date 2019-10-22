@@ -1,10 +1,10 @@
-package test.streameast.toolkit.help;
+package com.esturafd.jtoolkit.help;
 
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Locale;
 
-import com.streameast.toolkit.console.ConsoleIO;
+import com.esturafd.jtoolkit.console.ConsoleIO;
 
 public class FakeIO implements ConsoleIO {
     
@@ -102,7 +102,7 @@ public class FakeIO implements ConsoleIO {
         output.println(s);
     }
     
-    public void println(List<Object> l, boolean updatable) {}
+    public void println(List<? extends Object> l, boolean updatable) {}
     
     public void returnln() {}
     

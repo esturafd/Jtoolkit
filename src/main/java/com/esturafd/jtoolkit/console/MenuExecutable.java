@@ -1,4 +1,4 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 public interface MenuExecutable {
     

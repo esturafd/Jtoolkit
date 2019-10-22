@@ -1,6 +1,9 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
+
+import static com.esturafd.jtoolkit.console.Ansi.*;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -9,23 +12,21 @@ import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.streameast.toolkit.exception.ConsoleIOException;
-
-import static com.streameast.toolkit.console.Ansi.*;
+import com.esturafd.jtoolkit.exception.ConsoleIOException;
 
 /**
- * Default system console
+ * Console write and read controller
  * 
- * @author streameast
+ * @author esturafd
  */
-public class SystemConsoleIO implements ConsoleIO {
+public class DefaultConsole implements ConsoleIO, Closeable {
     
     private BufferedReader reader;
     private InputStreamReader input;
     private PrintStream output;
     private int lastln;
     
-    public SystemConsoleIO() {
+    public DefaultConsole() {
         output = System.out;
         lastln = 0;
     }

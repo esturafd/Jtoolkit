@@ -1,14 +1,13 @@
-package test.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import test.streameast.toolkit.help.FakeIO;
-
-import com.streameast.toolkit.console.ConsoleIO;
-import com.streameast.toolkit.console.Counting;
-import com.streameast.toolkit.console.SystemConsoleIO;
+import com.esturafd.jtoolkit.console.ConsoleIO;
+import com.esturafd.jtoolkit.console.Counting;
+import com.esturafd.jtoolkit.console.DefaultConsole;
+import com.esturafd.jtoolkit.help.FakeIO;
 
 //import static test.streameast.toolkit.help.ConsoleHandler.*;
 
@@ -20,7 +19,7 @@ public class CountingTest {
         int i;
         int maxCount = 5;
         boolean valid = true;
-        ConsoleIO console = new SystemConsoleIO();
+        ConsoleIO console = new DefaultConsole();
         try {
             Counting valCount = new Counting(console, maxCount);
             for (i = 0; i < (maxCount + 2) && valid; i++) {

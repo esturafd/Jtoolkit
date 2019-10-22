@@ -1,20 +1,20 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.streameast.toolkit.exception.ConsoleIOException;
-import com.streameast.toolkit.exception.MenuException;
+import com.esturafd.jtoolkit.exception.ConsoleIOException;
+import com.esturafd.jtoolkit.exception.MenuException;
 
-import static com.streameast.toolkit.yml.MapProperties.*;
-import static com.streameast.toolkit.console.Ansi.*;
+import static com.esturafd.jtoolkit.console.Ansi.*;
+import static com.esturafd.jtoolkit.yml.MapProperties.*;
 
 /**
  * Class of command line menu management
  * 
- * @author streameast
+ * @author esturafd
  */
 public class Menu {
     
@@ -25,26 +25,19 @@ public class Menu {
     private List<Menu> subMenus;
     private ConsoleIO console;
     
-    public Menu(String config) {
-        if (config != null) {
-            Menu foo = (Menu) getObjectProperties(config);
-            title = foo.getTitle();
-            text = foo.getText();
-            option = foo.getOption();
-            exec = foo.getExec();
-            subMenus = foo.getOptions();
-        }
+    public Menu() {
+        console = new DefaultConsole();
     }
     
-    public Menu() {
-        this(null);
+    public static Menu getConfigMenu(String config) {
+    	return (Menu) getObjectProperties(config);
     }
     
     /**
      * This method up the menu
      */
-    public void up(ConsoleIO console) {
-        this.console = console == null? new SystemConsoleIO(): console;
+    protected void up(ConsoleIO console) {
+        this.console = console == null? new DefaultConsole(): console;
         if (subMenus != null) {
             doMenu();
         } else if (exec != null) {

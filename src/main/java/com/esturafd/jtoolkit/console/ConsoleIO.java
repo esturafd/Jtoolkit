@@ -1,4 +1,4 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 import java.io.PrintStream;
 import java.util.List;

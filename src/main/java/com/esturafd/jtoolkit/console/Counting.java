@@ -1,4 +1,4 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -9,12 +9,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.streameast.toolkit.yml.MapProperties;
+import com.esturafd.jtoolkit.yml.MapProperties;
 
 /**
  * This class is a tool for the limitation of time of a cycle in console
  * 
- * @author streameast
+ * @author esturafd
  */
 public class Counting {
     
@@ -86,7 +86,6 @@ public class Counting {
         String foo = null;
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<String> fTask = executor.submit(new Callable<String>() {
-            @Override
             public String call() throws Exception {
                 return console.readLine();
             }

@@ -1,4 +1,4 @@
-package com.streameast.toolkit.yml;
+package com.esturafd.jtoolkit.yml;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 /**
  * This class is a map of properties yaml
  * 
- * @author streameast
+ * @author esturafd
  */
 public class MapProperties<K, V> extends HashMap<K, V> {
     

@@ -1,6 +1,6 @@
-package test.streameast.toolkit.help;
+package com.esturafd.jtoolkit.help;
 
-import com.streameast.toolkit.console.MenuExecutable;
+import com.esturafd.jtoolkit.console.MenuExecutable;
 
 public class SomeThink implements MenuExecutable {
     

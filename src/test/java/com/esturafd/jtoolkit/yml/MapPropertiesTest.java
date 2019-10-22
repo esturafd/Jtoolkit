@@ -1,4 +1,4 @@
-package test.streameast.toolkit.yml;
+package com.esturafd.jtoolkit.yml;
 
 import static org.junit.Assert.*;
 
@@ -7,9 +7,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.streameast.toolkit.help.ObjectTag;
-
-import com.streameast.toolkit.yml.MapProperties;
+import com.esturafd.jtoolkit.help.ObjectTag;
+import com.esturafd.jtoolkit.yml.MapProperties;
 
 public class MapPropertiesTest {
     

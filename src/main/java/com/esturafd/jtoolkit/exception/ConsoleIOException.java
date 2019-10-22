@@ -1,4 +1,4 @@
-package com.streameast.toolkit.exception;
+package com.esturafd.jtoolkit.exception;
 
 public class ConsoleIOException extends RuntimeException {
     

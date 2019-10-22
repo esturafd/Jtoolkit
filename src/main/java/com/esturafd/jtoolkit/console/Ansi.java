@@ -1,9 +1,9 @@
-package com.streameast.toolkit.console;
+package com.esturafd.jtoolkit.console;
 
 /**
  * Help class for ANSI console escape sequences
  * 
- * @author streameast
+ * @author esturafd
  */
 public class Ansi {
     

@@ -1,4 +1,4 @@
-package com.streameast.toolkit.sql;
+package com.esturafd.jtoolkit.sql;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 /**
  * This class handles the types of queries that are made, through QueryRunner
  * 
- * @author streameast
+ * @author esturafd
  */
 public class QueryHandler {
     
