@@ -1,9 +1,10 @@
 package com.esturafd.jtoolkit.console;
 
-import static com.esturafd.jtoolkit.console.Ansi.*;
+import static com.esturafd.jtoolkit.console.Ansi.ERS_DOWN;
+import static com.esturafd.jtoolkit.console.Ansi.ERS_SCREEN;
+import static com.esturafd.jtoolkit.console.Ansi.cursorUp;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -19,7 +20,7 @@ import com.esturafd.jtoolkit.exception.ConsoleIOException;
  * 
  * @author esturafd
  */
-public class DefaultConsole implements ConsoleIO, Closeable {
+public class DefaultConsole implements ConsoleIO {
     
     private BufferedReader reader;
     private InputStreamReader input;

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.esturafd.jtoolkit.console"},{"l":"com.esturafd.jtoolkit.exception"},{"l":"com.esturafd.jtoolkit.sql"},{"l":"com.esturafd.jtoolkit.yml"}]

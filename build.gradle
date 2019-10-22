@@ -1,10 +1,14 @@
 apply plugin: 'java-library'
+apply plugin: 'maven-publish'
 apply plugin: 'maven'
 
-group = 'com.streameast.toolkit'
-version = '2.0.0'
-sourceCompatibility = '1.5'
-targetCompatibility = '1.5'
+javadoc.destinationDir = file('docs')
+jar.baseName = 'esturafd-jtoolkit'
+sourceCompatibility = '1.6'
+targetCompatibility = '1.6'
+group = 'com.esturafd.jtoolkit'
+version = '2.1.0'
+
 
 dependencies {
     api 'commons-lang:commons-lang:2.6'
@@ -16,6 +20,24 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/esturafd/${rootProject.name}")
+            credentials {
+                username = 'esturafd'
+                password = githubToken
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -24,7 +46,11 @@ test {
     useJUnit()
 }
 
-task createPom <<{
-    pom {
-    }.writeTo("pom.xml")
+task createPom {
+    doLast {
+    	pom { }.writeTo("pom.xml")
+    }
 }
+
+build.dependsOn javadoc
+

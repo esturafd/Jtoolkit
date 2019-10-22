@@ -5,14 +5,14 @@ text: "texto de presentacion del menu"
 options:
     - !!com.esturafd.jtoolkit.console.Menu
         option: "opcion de menu 1"
-        exec: test.esturafd.jtoolkit.help.SomeThink
+        exec: com.esturafd.jtoolkit.help.SomeThink
     - !!com.esturafd.jtoolkit.console.Menu
         option: "opcion de menu 2"
         title: "Sub-menu opcion 2"
         options:
             - !!com.esturafd.jtoolkit.console.Menu
                 option: "opcion de sub-menu 1"
-                exec: test.esturafd.jtoolkit.help.SomeThink
+                exec: com.esturafd.jtoolkit.help.SomeThink
             - !!com.esturafd.jtoolkit.console.Menu
                 option: "opcion de sub-menu 2"
-                exec: test.esturafd.jtoolkit.help.SomeThink
+                exec: com.esturafd.jtoolkit.help.SomeThink

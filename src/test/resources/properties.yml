@@ -1,6 +1,6 @@
 #
 name: "Prueba de la clase MapProperties"
 version: "1.0"
-object: !!test.streameast.toolkit.help.ObjectTag
+object: !!com.esturafd.jtoolkit.help.ObjectTag
     nombre: Juan
     edad: 27
