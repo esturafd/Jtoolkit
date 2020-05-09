@@ -15,10 +15,5 @@ public interface Sequence {
 	/**
 	 * @return Complete sequence
 	 */
-	public String getSequence();
-	
-	/**
-	 * @return Sequence code
-	 */
-	public String toString();
+	public String getRaw();
 }

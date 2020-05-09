@@ -16,7 +16,7 @@ public enum Erase implements Sequence {
 	}
 
 	@Override
-	public String getSequence() {
+	public String getRaw() {
 		return ESC + id;
 	}
 

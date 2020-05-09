@@ -22,7 +22,7 @@ public enum Background implements Sequence, Attribute {
 	}
 	
 	@Override
-	public String getSequence() {
+	public String getRaw() {
 		return ESC + String.format(FORMAT, id);
 	}
 	

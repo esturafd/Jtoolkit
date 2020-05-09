@@ -12,12 +12,12 @@ public class Cursor {
 		return new Sequence() {
 			
 			@Override
-			public String getSequence() {
+			public String getRaw() {
 				return ESC + func;
 			}
 			
 			public String toString() {
-				return getSequence();
+				return getRaw();
 			}
 		};
 	}
