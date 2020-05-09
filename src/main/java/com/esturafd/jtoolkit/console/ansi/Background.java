@@ -1,7 +1,6 @@
 package com.esturafd.jtoolkit.console.ansi;
 
 /**
- * public enum <b>Background</b>
  * <p>List of colors supported by the text background on an ANSI console</p>
  * @author eramos
  */

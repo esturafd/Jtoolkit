@@ -1,8 +1,6 @@
 package com.esturafd.jtoolkit.console.ansi;
 
 /**
- * public class <b>Cursor</b>
- * 
  * <p>Help class in handling the cursor in an ANSI console, if the 
  * output corresponds to an ANSI compatible console (Linux), to 
  * move the course it can be done in this way:</p>

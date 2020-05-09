@@ -1,7 +1,6 @@
 package com.esturafd.jtoolkit.console.ansi;
 
 /**
- * public enum <b>Erase</b>
  * <p>List of erase commands supported by ANSI console</p>
  * @author esturafd
  */

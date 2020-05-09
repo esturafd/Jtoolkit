@@ -1,7 +1,6 @@
 package com.esturafd.jtoolkit.console.ansi;
 
 /**
- * public enum <b>Text</b>
  * <p>List of colors supported by text on an ANSI console</p>
  * @author esturafd
  */
