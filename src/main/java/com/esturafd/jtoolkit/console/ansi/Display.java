@@ -21,11 +21,11 @@ public enum Display implements Sequence, Attribute {
 	}
 	
 	@Override
-	public String getRaw() {
-		return ESC + String.format(FORMAT, id);
+	public String getCode() {
+		return id;
 	}
 
 	public String toString() {
-		return id;
+		return ESC + String.format(FORMAT, id);
 	}
 }

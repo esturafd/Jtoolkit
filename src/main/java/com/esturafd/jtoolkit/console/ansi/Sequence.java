@@ -13,7 +13,7 @@ public interface Sequence {
 	public static final String ESC = "\033";
 	
 	/**
-	 * @return Complete sequence
+	 * @return the raw attribute code
 	 */
-	public String getRaw();
+	public String getCode();
 }

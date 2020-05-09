@@ -1,7 +1,8 @@
 package com.esturafd.jtoolkit.console.ansi;
 
 /**
- * Text background color attributes
+ * public enum <b>Background</b>
+ * <p>List of colors supported by the text background on an ANSI console</p>
  * @author eramos
  */
 public enum Background implements Sequence, Attribute {
@@ -13,20 +14,32 @@ public enum Background implements Sequence, Attribute {
 	BLUE("44"),
 	MAGENTA("45"),
 	CYAN("46"),
-	WHITE("47");
+	WHITE("47"),
+	RESET("0");
 	
 	private String id;
 	
 	Background(String id) {
 		this.id = id;
 	}
-	
-	@Override
-	public String getRaw() {
-		return ESC + String.format(FORMAT, id);
+
+	/**
+	 * Paint the text background in ANSI console
+	 * @param color background color
+	 * @param text text to be colored
+	 * @return text to be sent to the console
+	 */
+	public static String paint(Background color, String text) {
+		return String.format("%s%s%s", color, text, Background.RESET);
 	}
 	
-	public String toString() {
+	@Override
+	public String getCode() {
 		return id;
+	}
+	
+	@Override
+	public String toString() {
+		return ESC + String.format(FORMAT, id);
 	}
 }

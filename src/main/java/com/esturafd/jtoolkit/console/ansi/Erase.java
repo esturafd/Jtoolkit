@@ -1,5 +1,10 @@
 package com.esturafd.jtoolkit.console.ansi;
 
+/**
+ * public enum <b>Erase</b>
+ * <p>List of erase commands supported by ANSI console</p>
+ * @author esturafd
+ */
 public enum Erase implements Sequence {
 	
 	END_LINE("[K"),
@@ -16,8 +21,12 @@ public enum Erase implements Sequence {
 	}
 
 	@Override
-	public String getRaw() {
-		return ESC + id;
+	public String getCode() {
+		return id;
 	}
 
+	@Override
+	public String toString() {
+		return ESC + id;
+	}
 }
