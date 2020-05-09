@@ -1,9 +1,5 @@
 package com.esturafd.jtoolkit.console;
 
-import static com.esturafd.jtoolkit.console.Ansi.ERS_DOWN;
-import static com.esturafd.jtoolkit.console.Ansi.ERS_SCREEN;
-import static com.esturafd.jtoolkit.console.Ansi.cursorUp;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,9 +7,11 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang.StringUtils;
-
+import com.esturafd.jtoolkit.console.ansi.Cursor;
+import com.esturafd.jtoolkit.console.ansi.Erase;
 import com.esturafd.jtoolkit.exception.ConsoleIOException;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Console write and read controller
@@ -26,6 +24,9 @@ public class DefaultConsole implements ConsoleIO {
     private InputStreamReader input;
     private PrintStream output;
     private int lastln;
+
+    private static final String READING_ERROR = "Error when reading console";
+    private static final String CLOSING_ERROR = "Error when closing console";
     
     public DefaultConsole() {
         output = System.out;
@@ -117,7 +118,7 @@ public class DefaultConsole implements ConsoleIO {
     }
     
     public void println(List<? extends Object> l, boolean updatable) {
-        if (l.size() > 0) {
+        if (!l.isEmpty()) {
             if (updatable) {
                 returnln();
             }
@@ -132,13 +133,13 @@ public class DefaultConsole implements ConsoleIO {
     
     public void returnln(int ln) {
         if (ln > 0) {
-            output.println(cursorUp(ln));
-            output.println(ERS_DOWN);
+            output.println(Cursor.up(ln));
+            output.println(Erase.DOWN);
         }
     }
     
     public void clean() {
-        output.println(ERS_SCREEN);
+        output.println(Erase.SCREEN);
     }
     
     public int read() {
@@ -147,7 +148,7 @@ public class DefaultConsole implements ConsoleIO {
         try {
             foo = reader.read();
         } catch(IOException e) {
-            throw new ConsoleIOException("Error when reading console", e);
+            throw new ConsoleIOException(READING_ERROR, e);
         }
         return foo;
     }
@@ -158,7 +159,7 @@ public class DefaultConsole implements ConsoleIO {
         try {
             foo = reader.read(cbuf, off, len);
         } catch(IOException e) {
-            throw new ConsoleIOException("Error when reading console", e);
+            throw new ConsoleIOException(READING_ERROR, e);
         }
         return foo;
     }
@@ -169,7 +170,7 @@ public class DefaultConsole implements ConsoleIO {
         try {
             foo = reader.readLine();
         } catch(IOException e) {
-            throw new ConsoleIOException("Error when reading console", e);
+            throw new ConsoleIOException(READING_ERROR, e);
         }
         return foo;
     }
@@ -180,7 +181,7 @@ public class DefaultConsole implements ConsoleIO {
                 reader.close();
                 input.close();
             } catch(IOException e) {
-                throw new ConsoleIOException("Error when closing console", e);
+                throw new ConsoleIOException(CLOSING_ERROR, e);
             }
         }
     }
