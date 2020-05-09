@@ -11,11 +11,24 @@ import org.yaml.snakeyaml.Yaml;
 import net.xrrocha.yamltag.DefaultYamlFactory;
 
 /**
- * This class is a map of properties yaml
+ * <p>Configuration importer mainly in map form, but 
+ * can also be imported as a list or as a custom 
+ * object. The ways to instantiate the configurations 
+ * would be:</p>
  * 
+ * <code>
+ * // Map
+ * Map<String, Object> propertyMap = new PropertyMap<>("config.yml");
+ * 
+ * // List
+ * List<Object> propertyList = PropertyMap.findProperties("config.yml");
+ * 
+ * // Custom Object
+ * MyClass propertyObject = PropertyMap.findProperties("config.yml");
+ * </code>
  * @author esturafd
  */
-public class MapProperties<K, V> extends HashMap<K, V> {
+public class PropertyMap<K, V> extends HashMap<K, V> {
     
     private static final long serialVersionUID = 1L;
     private static final String READING_ERROR = "Error reading file %s sent as parameter";
@@ -23,7 +36,7 @@ public class MapProperties<K, V> extends HashMap<K, V> {
     private static final String TYPE_ERROR = "Argument %s is not a Map";
     
     @SuppressWarnings("unchecked")
-    public MapProperties(String path) {
+    public PropertyMap(String path) {
         Object foo = findProperties(path);
         if (foo instanceof Map<?, ?>) {
             this.putAll((Map<K, V>) foo);
@@ -33,12 +46,12 @@ public class MapProperties<K, V> extends HashMap<K, V> {
     }
     
     /**
-     * This method return a map properties yaml
-     * 
-     * @return Map properties
+     * Find the YAML-based properties file, depends on the configuration, 
+     * the object to return can be a Map, a list or a custom Object
+     * @return property structure
      */
     public static Object findProperties(String path) {
-        ClassLoader loader = MapProperties.class.getClassLoader();
+        ClassLoader loader = PropertyMap.class.getClassLoader();
         File file = new File(loader.getResource(path).getFile());
         Object foo = null;
         if (file.exists()) {
@@ -55,9 +68,9 @@ public class MapProperties<K, V> extends HashMap<K, V> {
     }
     
     /**
-     * This method return a map properties yaml
-     * 
-     * @return Map properties
+     * Find the YAML-based properties file, depends on the configuration, 
+     * the object to return can be a Map, a list or a custom Object
+     * @return property structure
      */
     public static Object findProperties(File file) {
         Yaml parser = new DefaultYamlFactory().newYaml();

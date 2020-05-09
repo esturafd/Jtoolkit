@@ -15,7 +15,7 @@ public class MapPropertiesTest {
     
     @Before
     public void initMap() {
-        properties = new MapProperties<String, Object>("properties.yml");
+        properties = new PropertyMap<String, Object>("properties.yml");
     }
     
     @Test
