@@ -15,6 +15,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 /**
  * This class handles the types of queries that are made, through QueryRunner
+ * @deprecated
  * 
  * @author esturafd
  */

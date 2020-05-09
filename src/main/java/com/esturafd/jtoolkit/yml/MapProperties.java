@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.xrrocha.yamltag.DefaultYamlFactory;
-
 import org.yaml.snakeyaml.Yaml;
+
+import net.xrrocha.yamltag.DefaultYamlFactory;
 
 /**
  * This class is a map of properties yaml
@@ -18,12 +18,17 @@ import org.yaml.snakeyaml.Yaml;
 public class MapProperties<K, V> extends HashMap<K, V> {
     
     private static final long serialVersionUID = 1L;
+    private static final String READING_ERROR = "Error reading file %s sent as parameter";
+    private static final String FINDING_ERROR = "File %s not found";
+    private static final String TYPE_ERROR = "Argument %s is not a Map";
     
     @SuppressWarnings("unchecked")
     public MapProperties(String path) {
-        Object foo = getObjectProperties(path);
+        Object foo = findProperties(path);
         if (foo instanceof Map<?, ?>) {
             this.putAll((Map<K, V>) foo);
+        } else {
+            throw new IllegalArgumentException(String.format(TYPE_ERROR, path));
         }
     }
     
@@ -32,16 +37,18 @@ public class MapProperties<K, V> extends HashMap<K, V> {
      * 
      * @return Map properties
      */
-    public static Object getObjectProperties(String path) {
+    public static Object findProperties(String path) {
         ClassLoader loader = MapProperties.class.getClassLoader();
         File file = new File(loader.getResource(path).getFile());
         Object foo = null;
         if (file.exists()) {
-            foo = getObjectProperties(file);
+            foo = findProperties(file);
         } else {
             file = new File(path);
             if (file.exists()) {
-                foo = getObjectProperties(file);
+                foo = findProperties(file);
+            } else {
+                throw new IllegalArgumentException(String.format(FINDING_ERROR, path));
             }
         }
         return foo;
@@ -52,7 +59,7 @@ public class MapProperties<K, V> extends HashMap<K, V> {
      * 
      * @return Map properties
      */
-    public static Object getObjectProperties(File file) {
+    public static Object findProperties(File file) {
         Yaml parser = new DefaultYamlFactory().newYaml();
         Object foo = null;
         try {
@@ -65,7 +72,7 @@ public class MapProperties<K, V> extends HashMap<K, V> {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException(String.format(READING_ERROR, file.getName()), e);
         }
         return foo;
     }
