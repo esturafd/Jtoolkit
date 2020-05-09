@@ -1,14 +1,13 @@
 package com.esturafd.jtoolkit.yml;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
+import com.esturafd.jtoolkit.help.ObjectTag;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import com.esturafd.jtoolkit.help.ObjectTag;
-import com.esturafd.jtoolkit.yml.MapProperties;
 
 public class MapPropertiesTest {
     

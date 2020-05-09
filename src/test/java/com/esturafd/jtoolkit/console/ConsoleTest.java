@@ -1,10 +1,8 @@
 package com.esturafd.jtoolkit.console;
 
-import org.junit.Test;
-
-import com.esturafd.jtoolkit.console.ConsoleIO;
-import com.esturafd.jtoolkit.console.Menu;
 import com.esturafd.jtoolkit.help.FakeIO;
+
+import org.junit.Test;
 
 public class ConsoleTest {
     

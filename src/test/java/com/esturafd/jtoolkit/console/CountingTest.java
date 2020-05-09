@@ -1,13 +1,10 @@
 package com.esturafd.jtoolkit.console;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+
+import com.esturafd.jtoolkit.help.FakeIO;
 
 import org.junit.Test;
-
-import com.esturafd.jtoolkit.console.ConsoleIO;
-import com.esturafd.jtoolkit.console.Counting;
-import com.esturafd.jtoolkit.console.DefaultConsole;
-import com.esturafd.jtoolkit.help.FakeIO;
 
 //import static test.streameast.toolkit.help.ConsoleHandler.*;
 
