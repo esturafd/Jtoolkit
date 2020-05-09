@@ -18,6 +18,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
  * 
  * @author esturafd
  */
+@Deprecated
 public class QueryHandler {
     
     private QueryRunner runner;
