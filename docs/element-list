@@ -1,4 +1,5 @@
 com.esturafd.jtoolkit.console
+com.esturafd.jtoolkit.console.ansi
 com.esturafd.jtoolkit.exception
 com.esturafd.jtoolkit.sql
 com.esturafd.jtoolkit.yml
