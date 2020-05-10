@@ -18,7 +18,9 @@ dependencies {
 }
 ```
 
-## Ejemplo de configuracion de conexiones
+## Ejemplos
+
+### Configuracion de conexiones
 
 #### conections.yml
 ```yaml
@@ -36,11 +38,11 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.streameast.toolkit.yml.MapProperties;
+import com.streameast.toolkit.yml.PropertyMap;
 
 public class Main() {
     public static void main(String... args) {
-        Map<String, DataSource> conections = new MapProperties("conections.yml");
+        Map<String, DataSource> conections = new PropertyMap("conections.yml");
         try {
             try (Connection con = conections.get("data-base").getConnection()) {
                 // Connect to data base...
@@ -48,6 +50,40 @@ public class Main() {
         } catch (Exception e) {
             //...
         }
+    }
+}
+```
+
+### Creacion de menu
+
+#### menu.yml
+```yaml
+--- !!com.esturafd.jtoolkit.console.Menu
+title: "Titulo de menu principal"
+text: "texto de presentacion del menu"
+options:
+    - !!com.esturafd.jtoolkit.console.Menu
+        option: "opcion de menu 1"
+        exec: com.esturafd.jtoolkit.demo.Option
+```
+
+#### Main.java
+```java
+import com.streameast.toolkit.console.Menu;
+
+public class Main() {
+    public static void main(String... args) {
+        Menu menu = Menu.getMenu("menu.yml");
+        menu.run();
+    }
+}
+```
+
+#### Option.java
+```java
+public class Option implements MenuExcutable {
+    public void run() {
+        System.out.println("Hello World!");
     }
 }
 ```

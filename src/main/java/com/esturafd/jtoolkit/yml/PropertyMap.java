@@ -16,7 +16,7 @@ import net.xrrocha.yamltag.DefaultYamlFactory;
  * object. The ways to instantiate the configurations 
  * would be:</p>
  * 
- * <code>
+ * <pre><code>
  * // Map
  * Map<String, Object> propertyMap = new PropertyMap<>("config.yml");
  * 
@@ -25,7 +25,7 @@ import net.xrrocha.yamltag.DefaultYamlFactory;
  * 
  * // Custom Object
  * MyClass propertyObject = PropertyMap.findProperties("config.yml");
- * </code>
+ * </code></pre>
  * @author esturafd
  */
 public class PropertyMap<K, V> extends HashMap<K, V> {
