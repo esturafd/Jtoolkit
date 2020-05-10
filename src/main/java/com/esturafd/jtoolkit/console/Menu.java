@@ -1,19 +1,30 @@
 package com.esturafd.jtoolkit.console;
 
+import static com.esturafd.jtoolkit.yml.PropertyMap.findProperties;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.esturafd.jtoolkit.console.ansi.Erase;
+import com.esturafd.jtoolkit.console.ansi.Text;
 import com.esturafd.jtoolkit.exception.ConsoleIOException;
 import com.esturafd.jtoolkit.exception.MenuException;
 
-import static com.esturafd.jtoolkit.console.Ansi.*;
-import static com.esturafd.jtoolkit.yml.MapProperties.*;
-
 /**
- * Class of command line menu management
+ * <p>Implementation of menu through configuration in YAML 
+ * file for the execution of simple projects, the 
+ * simplest implementation would be:</p>
  * 
+ * <pre><code>
+ * public class Main {
+ *     public static void main(String... args) {
+ *         Menu menu = Menu.getMenu("config.yml");
+ *         menu.run();
+ *     }
+ * }
+ * </code></pre>
  * @author esturafd
  */
 public class Menu {
@@ -23,51 +34,59 @@ public class Menu {
     private String option;
     private String exec;
     private List<Menu> subMenus;
-    private ConsoleIO console;
+
+    private static final String ENTRY_ERROR = "Error when reading entry";
+    private static final String EXEC_ERROR = "Invalid exec class configuration";
+    private static final String INST_ERROR = "Error instantiating exec class";
+    private static final String INVALID_ERROR = "Invalid menu object";
     
-    public Menu() {
-        console = new DefaultConsole();
-    }
+    private Menu() {}
     
-    public static Menu getConfigMenu(String config) {
-    	return (Menu) getObjectProperties(config);
+    public static Menu getMenu(String confpath) {
+    	return (Menu) findProperties(confpath);
     }
     
     /**
-     * This method up the menu
+     * Run the menu or sub-menu
+     * @param console object where the menu is run
      */
-    protected void up(ConsoleIO console) {
-        this.console = console == null? new DefaultConsole(): console;
+    protected void run(ConsoleIO console) {
         if (subMenus != null) {
-            doMenu();
+            initialize(console);
         } else if (exec != null) {
-            doExec();
+            runOption();
         } else {
-            throw new MenuException("Invalid menu object");
+            throw new MenuException(INVALID_ERROR);
         }
     }
     
     /**
-     * This method up the menu
+     * Run the menu or sub-menu
      */
-    public void up() {
-        up(null);
+    public void run() {
+        ConsoleIO console = new DefaultConsole();
+        try {
+            run(console);
+        } finally {
+            console.close();
+        }
     }
     
     /**
-     * Execute the menu
+     * initializes the printing and request of data from the menu
+     * @param console object where the menu is run
      */
-    private void doMenu() {
+    private void initialize(ConsoleIO console) {
         int index = 0;
         do {
             try {
-                printMenu();
+                printMenu(console);
                 index = Integer.parseInt(console.readLine()) - 1;
                 if (index < subMenus.size() && index > 0) {
-                    subMenus.get(index).up(console);
+                    subMenus.get(index).run(console);
                 }
             } catch(ConsoleIOException e) {
-                throw new MenuException("Error when reading entry", e);
+                throw new MenuException(ENTRY_ERROR, e);
             } catch(NumberFormatException e) {
                 // The menu is reprinted
             }
@@ -75,40 +94,40 @@ public class Menu {
     }
     
     /**
-     * Execute the selected sub-menu
+     * One of the menu options is executed, the class to 
+     * execute has to implement MenuExecutable interface
      */
-    private void doExec() {
+    private void runOption() {
         try {
             Class<?> execClass = Class.forName(exec);
             Constructor<?> constructor = execClass.getConstructor();
             MenuExecutable program = (MenuExecutable) constructor.newInstance();
-            program.toDo();
+            program.run();
         } catch (ClassNotFoundException e) {
-            throw new MenuException("Invalid exec class configuration", e);
+            throw new MenuException(EXEC_ERROR, e);
         } catch (NoSuchMethodException e) {
-            throw new MenuException("Invalid exec class configuration", e);
+            throw new MenuException(EXEC_ERROR, e);
         } catch (InvocationTargetException e) {
-            throw new MenuException("Error instantiating exec class", e);
+            throw new MenuException(INST_ERROR, e);
         } catch (IllegalAccessException e) {
-            throw new MenuException("Error instantiating exec class", e);
+            throw new MenuException(INST_ERROR, e);
         } catch (InstantiationException e) {
-            throw new MenuException("Error instantiating exec class", e);
+            throw new MenuException(INST_ERROR, e);
         }
     }
     
     /**
-     * Print the menu
+     * print the listed menu options, put 0 to exit
+     * @param console object where the menu is run
      */
-    private void printMenu() {
-        System.out.println(ERS_SCREEN);
-        System.out.println(coloredText("# " + title + "\n", GREEN));
-        if (text != null) {
-            System.out.println(text + "\n");
-        }
+    private void printMenu(ConsoleIO console) {
+        console.println(Erase.SCREEN);
+        console.println(Text.paint(Text.GREEN, String.format("# %s%n", title)));
+        if (text != null) console.printf("%s%n%n", text);
         for (int i = 0; i < subMenus.size(); i++) {
-            System.out.println((i+1) + ". " + subMenus.get(i).getOption());   
+            console.printf("%d. %s%n", i+1, subMenus.get(i).getOption());
         }
-        System.out.print("\n0. Salir\n\nEscriba la opcion que desee: ");
+        console.print("\n0. Salir\n\nEscriba la opcion que desee: ");
     }
     
     public void setTitle(String title) {

@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.esturafd.jtoolkit.yml.MapProperties;
+import com.esturafd.jtoolkit.yml.PropertyMap;
 
 /**
  * This class is a tool for the limitation of time of a cycle in console
@@ -33,7 +33,7 @@ public class Counting {
     @SuppressWarnings("unchecked")
     public Counting(ConsoleIO console, String config, int maxNumber) {
         this(console, maxNumber);
-        Map<String, Object> map = new MapProperties<String, Object>(config);
+        Map<String, Object> map = new PropertyMap<String, Object>(config);
         if (map.containsKey("stop-messages")) {
             map = (Map<String, Object>) map.get("stop-messages");
         }

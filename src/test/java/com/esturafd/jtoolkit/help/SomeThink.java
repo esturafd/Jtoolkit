@@ -4,7 +4,7 @@ import com.esturafd.jtoolkit.console.MenuExecutable;
 
 public class SomeThink implements MenuExecutable {
     
-    public void toDo() {
+    public void run() {
         System.out.println("Menu!!\nHola Mundo");
     }
 }
