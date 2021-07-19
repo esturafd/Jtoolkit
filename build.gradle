@@ -17,7 +17,7 @@ version = '2.2.0'
 dependencies {
     api 'commons-lang:commons-lang:2.6'
     api 'commons-dbutils:commons-dbutils:1.7'
-    api 'org.yaml:snakeyaml:1.11'
+    api 'org.yaml:snakeyaml:1.26'
     api 'net.xrrocha:yamltag:1.0.0'
 
     // Use JUnit test framework
